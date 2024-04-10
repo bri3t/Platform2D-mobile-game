@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int valor = 1; // Puntos que sumara la moneda al recogerla
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GameManager gameManager; 
+  
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
+            gameManager.SumarPuntos(valor); // suma el valor (1) al gameManager
+            Destroy(this.gameObject); // destruye la moneda
         }
     }
 }
