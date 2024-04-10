@@ -11,7 +11,6 @@ public class JhonMovement : MonoBehaviour
     public float JumpForce; // controla la força de salt
     public AudioClip SoundJump; // per al soroll del salt
     public AudioClip SoundHit; // per al soroll al rebre bala
-    public Canvas canvas;
 
     // altres variables
     private Rigidbody2D Rigidbody2D;
@@ -27,7 +26,6 @@ public class JhonMovement : MonoBehaviour
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
-        canvas = GetComponent<Canvas>();
     }
 
     // Update is called once per frame
@@ -89,11 +87,13 @@ public class JhonMovement : MonoBehaviour
         Rigidbody2D.velocity = new Vector2(Horizontal * Speed, Rigidbody2D.velocity.y); 
     }
 
-    public void Hit()
+    public void Hit() // se llama esta funcion cuando recibe una bala
     {
-        Health = Health - 1;
+        Health -= 1; // se le resta una vida
 
-        if (Health == 0) Destroy(gameObject);
+        GameManager.Instance.PerderVida();
+        //HUD.Instance.DesactivarVida(Health); // llamamos a la funcion de desactivarVida de la clase HUD
+        if (Health == 0) Destroy(gameObject); 
         Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit);
 
     }
