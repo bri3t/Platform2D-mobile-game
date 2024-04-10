@@ -19,7 +19,7 @@ public class JhonMovement : MonoBehaviour
     private float Horizontal;
     private bool Grounded; // indica si estamos en el suelo o no (true significa que estamos en el suelo)
     private float LastShoot; // guarda cuando se hizo el ultimo disparo
-    private int Health = 6; // vida del personatge
+    private int Health = 4; // vida del personatge
 
 
     // Start is called before the first frame update
@@ -92,14 +92,6 @@ public class JhonMovement : MonoBehaviour
     public void Hit()
     {
         Health = Health - 1;
-
-        List<GameObject> canvasChildren = GetCanvasChildren(canvas);
-        foreach (GameObject child in canvasChildren)
-        {
-            Debug.Log("Elemento: " + child.name);
-            Debug.Log("Posición: " + child.transform.localPosition);
-            Debug.Log("Tamaño: " + child.GetComponent<RectTransform>().rect.size);
-        }
 
         if (Health == 0) Destroy(gameObject);
         Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit);
