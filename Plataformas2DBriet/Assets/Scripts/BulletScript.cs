@@ -41,18 +41,21 @@ public class BulletScript : MonoBehaviour
         JhonMovement john = collision.GetComponent<JhonMovement>();
         GruntScript grunt = collision.GetComponent<GruntScript>();
 
+
         // si es xoca amb jhon:
         if (john != null)
         {
             john.Hit();
+            DestroyBullet(); // destrueix la bala
+
         }
 
         // si es xoca amb l'enemic
         if (grunt != null)
         {
             grunt.Hit();
+            DestroyBullet(); // destrueix la bala
         }
-        DestroyBullet(); // destrueix la bala
     }
 
 }

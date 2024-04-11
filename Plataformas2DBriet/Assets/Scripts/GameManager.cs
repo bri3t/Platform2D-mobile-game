@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int PuntosTotales { get{ return puntosTotales; } } // Esto se hace para que la variable puntos totales sea visible por otras clases pero que no sea modificable des de la interfaz Unity
     private int puntosTotales; 
     public HUD hud;
+    public JhonMovement john = JhonMovement.Instance;
 
 
 
@@ -39,5 +40,13 @@ public class GameManager : MonoBehaviour
     {
         vidas -= 1;
         hud.DesactivarVida(vidas);
+        if (vidas == 0) john.Morir();
+
+    }
+
+    public void RecuperarVida()
+    {
+        vidas += 1;
+        hud.ActivarVida(vidas);
     }
 }

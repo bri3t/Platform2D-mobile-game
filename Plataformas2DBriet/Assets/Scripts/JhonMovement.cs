@@ -20,6 +20,7 @@ public class JhonMovement : MonoBehaviour
     private float LastShoot; // guarda cuando se hizo el ultimo disparo
     private int Health = 4; // vida del personatge
 
+    public static JhonMovement Instance { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -93,8 +94,15 @@ public class JhonMovement : MonoBehaviour
 
         GameManager.Instance.PerderVida();
         //HUD.Instance.DesactivarVida(Health); // llamamos a la funcion de desactivarVida de la clase HUD
-        if (Health == 0) Destroy(gameObject); 
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit);
+        //if (Health == 0) Destroy(gameObject); 
+        //Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit);
 
+    }
+
+    public void Morir()
+    {
+        Destroy(gameObject);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit);
+        Debug.Log("MARIOO");
     }
 }

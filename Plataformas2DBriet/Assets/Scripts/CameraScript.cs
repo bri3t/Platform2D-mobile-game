@@ -15,6 +15,9 @@ public class CameraScript : MonoBehaviour
         {
             Vector3 position = transform.position;
             position.x = Jhon.transform.position.x;
+            position.y = 0;
+            if (Jhon.transform.position.y >= 4.8f) position.y = Jhon.transform.position.y;
+            
             transform.position = position;
         }
 
