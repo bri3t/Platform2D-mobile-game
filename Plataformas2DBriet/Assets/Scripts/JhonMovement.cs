@@ -18,7 +18,6 @@ public class JhonMovement : MonoBehaviour
     private float Horizontal;
     private bool Grounded; // indica si estamos en el suelo o no (true significa que estamos en el suelo)
     private float LastShoot; // guarda cuando se hizo el ultimo disparo
-    private int Health = 4; // vida del personatge
 
     public static JhonMovement Instance { get; private set; }
 
@@ -56,7 +55,7 @@ public class JhonMovement : MonoBehaviour
 
 
         // fara la funcio de disparar si s'apreta la tecla per a fer-ho i el temps entre dispars és correcte
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > LastShoot + 0.25f) 
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > LastShoot + 0.15f) 
         {
             Shoot();
             LastShoot = Time.time;
@@ -90,7 +89,6 @@ public class JhonMovement : MonoBehaviour
 
     public void Hit() // se llama esta funcion cuando recibe una bala
     {
-        Health -= 1; // se le resta una vida
 
         GameManager.Instance.PerderVida();
         //HUD.Instance.DesactivarVida(Health); // llamamos a la funcion de desactivarVida de la clase HUD

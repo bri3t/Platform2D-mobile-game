@@ -4,77 +4,82 @@ using UnityEngine;
 
 public class GruntScript : MonoBehaviour
 {
-    // fa referencia al objecte de la bala
+    // Referencia al objeto de la bala
     public GameObject BulletPrefab;
 
-    // objecte que fa referencia a nosaltres
+    // Objeto que hace referencia a nosotros
     public GameObject John;
 
-    // variable per gestionar el temps entre dispars
+    // Variable para gestionar el tiempo entre disparos
     private float LastShoot;
 
-    private int Health = 3; // vida del enemic
+    private int Health = 2; // Vida del enemigo
 
     private Animator Animator;
 
     private void Start()
     {
-        Animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>(); // Obtenemos el componente Animator
     }
 
 
-    // Update is called once per frame
+    // Update se llama una vez por frame
     void Update()
     {
-        Animator.SetBool("dead", Health == 0);
+        Animator.SetBool("dead", Health == 0); // Establece el parámetro "dead" en el Animator
 
-        if (John == null) return;
-        // nomes seguira el codi si el personatge está viu, és a dir, que no es null
+        if (John == null) return; // Si el objeto John es nulo, salimos de la función
 
+        // Calculamos la dirección hacia John
         Vector3 direction = John.transform.position - transform.position;
 
-        // amb aixo el que farem serà que el enemic sempre estigui apuntant-nos a nosaltres
-        if (direction.x > 0.0f) transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
-        else transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
+        // Con esto aseguramos que el enemigo siempre esté apuntando hacia John
+        if (direction.x > 0.0f)
+            transform.localScale = new Vector3(5.0f, 5.0f, 1.0f);
+        else
+            transform.localScale = new Vector3(-5.0f, 5.0f, 1.0f);
 
-
-        // calculem la distancia en valor absolut que hi ha entre el enemic i jo
+        // Calculamos la distancia entre el enemigo y John
         float distance = Mathf.Abs(John.transform.position.x - transform.position.x);
 
-        // si la distancia es menor a 5 i el temps entre dispars és correcte, farem que l'enemic dispari
+        // Si la distancia es menor a 5 y el tiempo entre disparos es correcto, el enemigo dispara
         if (distance < 5.0f && Time.time > LastShoot + 0.5f)
         {
             Shoot();
             LastShoot = Time.time;
         }
-
-
     }
 
+    // Método para realizar el disparo
     private void Shoot()
     {
         Vector3 direction;
-        if (transform.localScale.x == 5.0f) direction = Vector2.right;
-        else direction = Vector2.left;
+        if (transform.localScale.x == 5.0f)
+            direction = Vector2.right;
+        else
+            direction = Vector2.left;
 
-        GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.5f, Quaternion.identity);
+        // Instanciamos la bala y establecemos su dirección
+        GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.75f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
     }
 
+    // Método para gestionar el impacto al enemigo
     public void Hit()
     {
-        Health = Health - 1;
+        Health = Health - 1; // Reducimos la vida del enemigo
         if (Health == 0)
         {
-            StartCoroutine(animacion());
+            StartCoroutine(animacion()); // Iniciamos la animación de muerte
         }
     }
 
+    // Corrutina para la animación de muerte
     IEnumerator animacion()
     {
-        Animator.SetBool("dead", true);
-        yield return new WaitForSeconds(1.0f);
-        Destroy(gameObject);
-        StopCoroutine("animacion");
+        Animator.SetBool("dead", true); // Establecemos el parámetro "dead" en el Animator como verdadero
+        yield return new WaitForSeconds(1.0f); // Esperamos un segundo
+        Destroy(gameObject); // Destruimos el objeto del enemigo
+        StopCoroutine("animacion"); // Detenemos la corutina
     }
 }

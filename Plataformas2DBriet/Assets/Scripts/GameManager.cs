@@ -1,52 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; } // Para que otras clases hagan referencia a este gameManager
-                                                             // Esto lo hago para que el prefab (coin por ejemplo) no se le tenga que indicar el gameManager
-                                                             // manualmente cada vez que quiero crear una nueva instancia
+    public static GameManager Instance { get; private set; } // Para que otras clases hagan referencia a este GameManager
 
-    private int vidas = 4;
+    public int Vidas { get { return vidas; } } // Variable para almacenar el número de vidas
 
-    public int PuntosTotales { get{ return puntosTotales; } } // Esto se hace para que la variable puntos totales sea visible por otras clases pero que no sea modificable des de la interfaz Unity
-    private int puntosTotales; 
-    public HUD hud;
-    public JhonMovement john = JhonMovement.Instance;
+    private int vidas = 4; // Inicializamos el número de vidas en 4 al inicio del juego
 
+    public int PuntosTotales { get { return puntosTotales; } } // Variable para almacenar los puntos totales
 
+    private int puntosTotales; // Inicializamos los puntos totales en 0 al inicio del juego
+
+    public HUD hud; // Referencia al HUD para actualizar la interfaz de usuario
+
+    public JhonMovement john = JhonMovement.Instance; // Referencia al movimiento de Jhon
+
+    public GameOverScreen GameOverScreen;
 
     private void Awake()
     {
-        if (Instance == null) // si esta vacia se le asigna la variable instance
+        if (Instance == null) // Si no hay una instancia previa de GameManager, se asigna la instancia actual
         {
             Instance = this;
-        }else // si no está vacia se avisara con un mensaje por consola
+        }
+        else // Si ya existe una instancia previa, se muestra un mensaje de advertencia en la consola
         {
-            Debug.Log("Hay más de un Game Manager en escena!");
+            Debug.Log("¡Hay más de un Game Manager en la escena!");
         }
     }
 
+    // Método para obtener el número actual de vidas
+    public int getVidasActuales()
+    {
+        return vidas;
+    }
 
-   
+    // Método para sumar puntos al contador de puntos totales
     public void SumarPuntos(int puntosASumar)
     {
         puntosTotales += puntosASumar;
-        hud.ActualizarPuntos(puntosTotales); // Actualizamos el contador
+        hud.ActualizarPuntos(puntosTotales); // Actualizamos el contador de puntos en la interfaz de usuario
     }
 
+    // Método para restar una vida
     public void PerderVida()
     {
-        vidas -= 1;
-        hud.DesactivarVida(vidas);
-        if (vidas == 0) john.Morir();
-
+        vidas -= 1; // Restamos una vida
+        hud.DesactivarVida(vidas); // Desactivamos la representación gráfica de una vida en la interfaz de usuario
+        if (vidas == 0)
+        {
+            john.Morir(); // Si el número de vidas llega a 0, Jhon muere
+            //SceneManager.LoadScene(0);
+            GameOverScreen.SetUp(puntosTotales);
+        }
     }
 
+    // Método para recuperar una vida
     public void RecuperarVida()
     {
-        vidas += 1;
-        hud.ActivarVida(vidas);
+        if (vidas == 4) // Si ya tenemos 4 vidas, no se puede recuperar más
+        {
+            return;
+        }
+        hud.ActivarVida(vidas); // Activamos la representación gráfica de una vida en la interfaz de usuario
+        vidas += 1; // Aumentamos en 1 el número de vidas
     }
 }
