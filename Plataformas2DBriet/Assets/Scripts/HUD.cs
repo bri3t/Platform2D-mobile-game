@@ -16,7 +16,7 @@ public class HUD : MonoBehaviour
 
     public void ActualizarPuntos(int puntosTotales)
     {
-        puntos.text = puntosTotales.ToString() + " / 15"; // Se le asigna al texto de los puntos el valor que le entra por parametro
+        puntos.text = puntosTotales.ToString() + " / " + GameManager.Instance.metaPuntos; // Se le asigna al texto de los puntos el valor que le entra por parametro
     }
 
     public void DesactivarVida(int indiceVida)

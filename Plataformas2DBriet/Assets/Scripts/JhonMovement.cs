@@ -6,18 +6,17 @@ using UnityEngine;
 public class JhonMovement : MonoBehaviour
 {
 
-    public GameObject BulletPrefab; // fa referencia a la bala
-    public float Speed; // es la variable que controla la velocitat del jugador
-    public float JumpForce; // controla la força de salt
-    public AudioClip SoundJump; // per al soroll del salt
-    public AudioClip SoundHit; // per al soroll al rebre bala
+    public GameObject BulletPrefab; // Referencia al prefab de la bala
+    public float Speed; // Velocidad del jugador
+    public float JumpForce; // Fuerza del salto
+    public AudioClip SoundJump; // Sonido del salto
+    public AudioClip SoundHit; // Sonido al recibir un disparo
 
-    // altres variables
     private Rigidbody2D Rigidbody2D;
     private Animator Animator;
     private float Horizontal;
-    private bool Grounded; // indica si estamos en el suelo o no (true significa que estamos en el suelo)
-    private float LastShoot; // guarda cuando se hizo el ultimo disparo
+    private bool Grounded; // Indica si estamos en el suelo o no (true significa que estamos en el suelo)
+    private float LastShoot; // Guarda cuando se hizo el último disparo
 
     public static JhonMovement Instance { get; private set; }
 
@@ -34,36 +33,33 @@ public class JhonMovement : MonoBehaviour
         Horizontal = Input.GetAxisRaw("Horizontal");
 
         if (Horizontal < 0.0f) transform.localScale = new Vector3(-5.0f, 5.0f, 5.0f);
-        else if( Horizontal > 0.0f) transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
+        else if (Horizontal > 0.0f) transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
         Animator.SetBool("running", Horizontal != 0.0f);
-
-
+        Animator.SetBool("dead", GameManager.Instance.Vidas == 0); // Establece el parámetro "dead" en el Animator
 
         Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.red);
         if (Physics2D.Raycast(transform.position, Vector3.down, 0.5f))
         {
             Grounded = true;
         }
-        else Grounded= false;
-        
+        else Grounded = false;
 
-        // executara la funcio de saltar si s'apreta la tecla per a fer-ho i el personatge esta tocant el terre
-        if (Input.GetKeyDown(KeyCode.W) && Grounded)        
+        // Ejecutará la función de saltar si se presiona la tecla correspondiente y el personaje está tocando el suelo
+        if (Input.GetKeyDown(KeyCode.W) && Grounded)
         {
             Jump();
         }
 
-
-        // fara la funcio de disparar si s'apreta la tecla per a fer-ho i el temps entre dispars és correcte
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > LastShoot + 0.15f) 
+        // Realizará la función de disparar si se presiona la tecla correspondiente y el tiempo entre disparos es correcto
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > LastShoot + 0.15f)
         {
             Shoot();
             LastShoot = Time.time;
-        } 
+        }
     }
 
 
-    private void Shoot() // funcio de disparar
+    private void Shoot() // Función de disparar
     {
         Vector3 direction;
         if (transform.localScale.x == 5.0f) direction = Vector2.right;
@@ -74,33 +70,38 @@ public class JhonMovement : MonoBehaviour
     }
 
 
-    private void Jump() // funcio per a saltar
+    private void Jump() // Función para saltar
     {
         Rigidbody2D.AddForce(Vector2.up * JumpForce);
         Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundJump);
-
     }
 
 
     private void FixedUpdate()
     {
-        Rigidbody2D.velocity = new Vector2(Horizontal * Speed, Rigidbody2D.velocity.y); 
+        Rigidbody2D.velocity = new Vector2(Horizontal * Speed, Rigidbody2D.velocity.y);
     }
 
-    public void Hit() // se llama esta funcion cuando recibe una bala
+    public void Hit() // Se llama a esta función cuando recibe una bala
     {
-
         GameManager.Instance.PerderVida();
-        //HUD.Instance.DesactivarVida(Health); // llamamos a la funcion de desactivarVida de la clase HUD
+        //HUD.Instance.DesactivarVida(Health); // Llamamos a la función de desactivarVida de la clase HUD
         //if (Health == 0) Destroy(gameObject); 
         //Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit);
-
     }
 
     public void Morir()
     {
-        Destroy(gameObject);
         Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit);
-        Debug.Log("MARIOO");
+        StartCoroutine(animacion()); // Iniciamos la animación de muerte
+    }
+
+    // Corrutina para la animación de muerte
+    IEnumerator animacion()
+    {
+        Animator.SetBool("dead", true); // Establecemos el parámetro "dead" en el Animator como verdadero
+        yield return new WaitForSeconds(1.0f); // Esperamos un segundo
+        Destroy(gameObject); // Destruimos el objeto del enemigo
+        StopCoroutine("animacion"); // Detenemos la corutina
     }
 }

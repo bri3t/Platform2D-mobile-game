@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     public int PuntosTotales { get { return puntosTotales; } } // Variable para almacenar los puntos totales
 
     private int puntosTotales; // Inicializamos los puntos totales en 0 al inicio del juego
+    public int metaPuntos;
 
     public HUD hud; // Referencia al HUD para actualizar la interfaz de usuario
 
-    public JhonMovement john = JhonMovement.Instance; // Referencia al movimiento de Jhon
+    public JhonMovement john = JhonMovement.Instance; // Referencia la clase john
 
     public GameOverScreen GameOverScreen;
+    public WinnerScreen WinnerScreen;
 
     private void Awake()
     {
@@ -33,17 +35,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Método para obtener el número actual de vidas
-    public int getVidasActuales()
-    {
-        return vidas;
-    }
+   
 
     // Método para sumar puntos al contador de puntos totales
     public void SumarPuntos(int puntosASumar)
     {
         puntosTotales += puntosASumar;
+        Debug.Log(puntosTotales);
         hud.ActualizarPuntos(puntosTotales); // Actualizamos el contador de puntos en la interfaz de usuario
+        if (puntosTotales >= metaPuntos)
+        {
+            Debug.Log("win");
+            WinnerScreen.SetUp(puntosTotales);
+        }
     }
 
     // Método para restar una vida
@@ -51,10 +55,13 @@ public class GameManager : MonoBehaviour
     {
         vidas -= 1; // Restamos una vida
         hud.DesactivarVida(vidas); // Desactivamos la representación gráfica de una vida en la interfaz de usuario
+        Debug.Log(vidas);
+
         if (vidas == 0)
         {
             john.Morir(); // Si el número de vidas llega a 0, Jhon muere
             //SceneManager.LoadScene(0);
+            Debug.Log("morir");
             GameOverScreen.SetUp(puntosTotales);
         }
     }
