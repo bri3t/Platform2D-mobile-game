@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - BordeInferior
   - coinBorder
+  - Borders
   layers:
   - Default
   - TransparentFX

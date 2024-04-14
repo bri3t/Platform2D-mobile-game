@@ -230,10 +230,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 8476119518381985782, guid: a56314569d1197a4eac965aee52d784f, type: 3}
-  Speed: 5
   JumpForce: 500
   SoundJump: {fileID: 8300000, guid: e1c3fa518169bff479f2ca6c95698293, type: 3}
   SoundHit: {fileID: 8300000, guid: c01b7dc8ca1aedb44818951b9437d449, type: 3}
+  speed: 0
 --- !u!95 &100068126506973152
 Animator:
   serializedVersion: 5

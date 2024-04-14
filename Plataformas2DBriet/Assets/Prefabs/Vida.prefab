@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3511262958125483472}
   - component: {fileID: 71470558178013823}
   - component: {fileID: 8385457869467622111}
+  - component: {fileID: 2319221071501316354}
   m_Layer: 0
   m_Name: Vida
   m_TagString: Untagged
@@ -143,3 +144,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1746c5c22af87846a0d7e20df8bee3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2319221071501316354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108229900601841881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: -1.17, y: -2.72}
+  m_UseGraphicAlpha: 1

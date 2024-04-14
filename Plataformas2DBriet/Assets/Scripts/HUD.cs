@@ -12,7 +12,6 @@ public class HUD : MonoBehaviour
     public static HUD Instance { get; private set; } // Para que otras clases hagan referencia a este gameManager
 
 
-  
 
     public void ActualizarPuntos(int puntosTotales)
     {
