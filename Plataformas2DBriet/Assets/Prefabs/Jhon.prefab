@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3544171133121419216}
   - component: {fileID: 3524264444593715644}
   - component: {fileID: 4652198277295008185}
-  - component: {fileID: 4276482026543223472}
   - component: {fileID: 8047650528481825897}
   - component: {fileID: 100068126506973152}
   m_Layer: 0
@@ -161,62 +160,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.093502335, y: 0.18299483}
   m_EdgeRadius: 0
---- !u!68 &4276482026543223472
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7224348646505556681}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.06658886, y: 0.09251834}
-  - {x: 0.030164372, y: 0.09324681}
-  - {x: 0.04546272, y: 0.083047904}
-  - {x: 0.04546272, y: 0.052451316}
-  - {x: 0.02725046, y: 0.03861001}
-  - {x: 0.025169428, y: 0.006007048}
-  - {x: 0.034535363, y: -0.008741883}
-  - {x: 0.070231356, y: 0.0014569844}
-  - {x: 0.09427155, y: -0.0065564187}
-  - {x: 0.09354312, y: -0.03423907}
-  - {x: 0.025657259, y: -0.059696257}
-  - {x: 0.024992779, y: -0.09029886}
-  - {x: -0.059312824, y: -0.09029886}
-  - {x: -0.05907277, y: -0.056545965}
-  - {x: -0.09610214, y: -0.025443472}
-  - {x: -0.09610214, y: 0.05079004}
-  - {x: -0.06676132, y: 0.09191074}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!114 &8047650528481825897
 MonoBehaviour:
   m_ObjectHideFlags: 0
