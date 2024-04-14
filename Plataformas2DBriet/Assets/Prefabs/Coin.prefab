@@ -166,4 +166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valor: 1
-  SoundCoin: {fileID: 8300000, guid: 80388856fb390864bb430f57d205437c, type: 3}
+  SoundCoin: {fileID: 8300000, guid: e7f08c29109e2f144957cd87e8c3b7f8, type: 3}

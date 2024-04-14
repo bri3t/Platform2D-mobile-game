@@ -38,21 +38,33 @@ public class BulletScript : MonoBehaviour
     // Se llama cuando la bala entra en colisión con otro Collider2D
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        JhonMovement john = collision.GetComponent<JhonMovement>(); // Obtenemos el componente JhonMovement del objeto con el que colisionó la bala
-        GruntScript grunt = collision.GetComponent<GruntScript>(); // Obtenemos el componente GruntScript del objeto con el que colisionó la bala
 
-        // Si choca con Jhon:
-        if (john != null)
-        {
+
+        if (collision.gameObject.tag.Equals("Player")) {
+            Destroy(this.gameObject);
+            JhonMovement john = collision.GetComponent<JhonMovement>(); // Obtenemos el componente JhonMovement del objeto con el que colisionó la bala
             john.Hit(); // Llamamos al método Hit() del script JhonMovement
-            DestroyBullet(); // Destruimos la bala
         }
 
-        // Si choca con el enemigo
-        if (grunt != null)
+        if (collision.gameObject.tag.Equals("Enemy"))
         {
-            grunt.Hit(); // Llamamos al método Hit() del script GruntScript
-            DestroyBullet(); // Destruimos la bala
+            Destroy(this.gameObject);
+            GruntScript grunt = collision.GetComponent<GruntScript>(); // Obtenemos el componente GruntScript del objeto con el que colisionó la bala
+            grunt.Hit(); // Llamamos al método Hit() del script JhonMovement
         }
+        /*
+                // Si choca con Jhon:
+                if (john != null)
+                {
+                    john.Hit(); // Llamamos al método Hit() del script JhonMovement
+                    DestroyBullet(); // Destruimos la bala
+                }
+
+                // Si choca con el enemigo
+                if (grunt != null)
+                {
+                    grunt.Hit(); // Llamamos al método Hit() del script GruntScript
+                    DestroyBullet(); // Destruimos la bala
+                }*/
     }
 }

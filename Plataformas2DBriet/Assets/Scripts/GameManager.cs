@@ -60,8 +60,6 @@ public class GameManager : MonoBehaviour
         if (vidas == 0)
         {
             john.Morir(); // Si el número de vidas llega a 0, Jhon muere
-            //SceneManager.LoadScene(0);
-            Debug.Log("morir");
             GameOverScreen.SetUp(puntosTotales);
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GruntScript : MonoBehaviour
@@ -43,7 +44,7 @@ public class GruntScript : MonoBehaviour
         float distance = Mathf.Abs(John.transform.position.x - transform.position.x);
 
         // Si la distancia es menor a 5 y el tiempo entre disparos es correcto, el enemigo dispara
-        if (distance < 5.0f && Time.time > LastShoot + 0.5f && GameManager.Instance.Vidas > 0)
+        if (distance < 5.0f && Time.time > LastShoot + 1.0f && GameManager.Instance.Vidas > 0 && Health > 0)
         {
             Shoot();
             LastShoot = Time.time;
@@ -60,7 +61,7 @@ public class GruntScript : MonoBehaviour
             direction = Vector2.left;
 
         // Instanciamos la bala y establecemos su dirección
-        GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 1.2f, Quaternion.identity);
+        GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 1.0f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
     }
 
@@ -73,6 +74,8 @@ public class GruntScript : MonoBehaviour
             StartCoroutine(animacion()); // Iniciamos la animación de muerte
         }
     }
+
+
 
     // Corrutina para la animación de muerte
     IEnumerator animacion()

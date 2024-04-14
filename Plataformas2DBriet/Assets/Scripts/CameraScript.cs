@@ -16,8 +16,10 @@ public class CameraScript : MonoBehaviour
             Vector3 position = transform.position;
             position.x = Jhon.transform.position.x;
             position.y = 0;
-            if (Jhon.transform.position.y >= 4.8f) position.y = Jhon.transform.position.y;
-            
+
+            // Verificamos que jhon haya tocado el colisionador de la plataforma de arriba y que su posicion "y" sea mayor a 4.8
+            if (Jhon.GetComponent<JhonMovement>().IsOnTop && Jhon.transform.position.y >= 4.8f) position.y = Jhon.transform.position.y;
+
             transform.position = position;
         }
 
