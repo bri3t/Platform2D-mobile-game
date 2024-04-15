@@ -28,11 +28,58 @@ Para poder pasarte el juego, deberas saltar encima de esta palmera, y avanzar a 
 - **Bullet**: "BulletAnimation" (animacion de la bala al ser disparada)
 
 ## Sources
+Listado de enlaces a todas las fuentes de información, sprites, assets o documentación externa que he utilizado para desarrollar el juego.
 
-## Instalación
+- [Unity Documentación Oficial](https://unity.com/docs)
+- [SpriteSheets principal](https://didigameboy.itch.io/jambo-jungle-free-sprites-asset-pack)
+- [Assets coins](https://laredgames.itch.io/gems-coins-free)
+- [Assets corazones](https://nicolemariet.itch.io/pixel-heart-animation-32x32-16x16-freebie)
+- [Botones](https://void1gaming.itch.io/pixel-buttons)
+- [Fuente](https://www.dafont.com/es/search.php?q=Minecraft)
+- Sonidos extra
+   - [sound](https://elements.envato.com/es/sound-effects/coin)
+   - [sound](https://www.fesliyanstudios.com/royalty-free-music/downloads-c/8-bit-music/6)
+- [Wallpaper menú](https://wallpaper.mob.org/pc/image/artistic-pixel_art-mountain-waterfall-1035817.html#google_vignette)
 
-Para instalar el juego, sigue estos pasos:
+## Cómo Instalar y Ejecutar
 
+### Descargar el Código Fuente
+Para obtener el código fuente del juego, primero necesitarás clonar el repositorio de GitHub. Puedes hacer esto usando Git. Si no tienes Git instalado en tu ordenador, puedes descargarlo desde [git-scm.com](https://git-scm.com/downloads).
+
+#### (Windows)
+Abre una terminal y ejecuta el siguiente comando para clonar el repositorio:
 1. Clona el repositorio a tu máquina local usando:
    ```bash
-   git clone URL_DEL_REPOSITORIO
+   git clone https://github.com/bri3t/Platform2D-mobile-game.git
+   cd Platform2D-mobile-game
+   ```
+## Abre el Proyecto en Unity
+
+Una vez que tengas el código fuente en tu máquina local, abre Unity Hub. Si aún no tienes Unity Hub, puedes descargarlo desde [Unity Download Page](https://unity.com/download).
+
+En Unity Hub, ve a la pestaña 'Projects', luego haz clic en 'ADD' y selecciona la carpeta donde clonaste el proyecto. Esto añadirá el proyecto a tu lista de proyectos de Unity. Haz clic en el nombre del proyecto para abrirlo en el editor de Unity.
+Construir y Ejecutar el Juego
+
+Para construir y ejecutar el juego en tu dispositivo móvil, sigue estos pasos en el editor de Unity:
+1. Conecta tu dispositivo móvil a la computadora a través de USB. Asegúrate de que esté configurado para permitir la depuración por USB.
+2. En Unity, ve a File > Build Settings.
+3. Selecciona la plataforma de destino (Android) en la lista y haz clic en Switch Platform.
+4. Para Android, asegúrate de que Google Android Project esté marcado si quieres editar el proyecto con Android Studio.
+5. Haz clic en Build. Esto compilará el juego y generará un fichero apk que podras instalar en un dispositivo android.
+6. Jugar!
+
+## Compatibilidad
+Para hacer este proyecto he usado:
+- Unity: 2022.3.21f1
+- Microsoft Visual Studio: 2022 17.9.6
+- Java: "17.0.9" 2023-10-17 LTS
+
+## Lenguaje de programación usado
+- C#
+
+## Paquetes usados
+
+![libs](https://github.com/bri3t/Platform2D-mobile-game/assets/120582826/bf2a03e8-98ee-4bf6-88d7-e55d4d154aae)
+
+
+
