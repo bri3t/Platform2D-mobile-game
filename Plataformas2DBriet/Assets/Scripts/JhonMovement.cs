@@ -23,6 +23,9 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     public bool IsOnTop { get { return isOnTop; } }
     private bool isOnTop = false;
 
+    public SpriteRenderer spriteRenderer;
+    private bool isHurting = false;
+
     public static JhonMovement Instance { get; private set; } // Instancia estática de la clase JhonMovement
 
 
@@ -33,6 +36,7 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     {
         rb2d = GetComponent<Rigidbody2D>(); // Obtiene el Rigidbody2D del objeto
         Animator = GetComponent<Animator>(); // Obtiene el Animator del objeto
+        spriteRenderer = GetComponent<SpriteRenderer>(); 
     }
 
 
@@ -148,7 +152,26 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
 
+        if (collision.gameObject.CompareTag("Cabeza"))
+        {
+            Grounded = true;
+            Debug.Log("wtf");
+            //GruntScript grunt = collision.gameObject.GetComponent<GruntScript>(); // Obtenemos el componente GruntScript del objeto con el que colisionó la bala
+            //grunt.StartCoroutine(animacion()); // Iniciamos la animación de muerte
+        }
+
+
+        //if (collision.gameobject.comparetag("enemy"))
+        //{
+        //    hit();
+        //}
+
+
+
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -157,15 +180,45 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
             isOnTop = true;        
         }
 
+
     }
 
-    
+    IEnumerator ChangeColorTemporarily()
+    {
+        isHurting = true;
+        Color originalColor = spriteRenderer.color; // Guarda el color original
+        Color targetColor = Color.red; // Define el color a cambiar
 
+        // Cambia al color rojo durante un breve periodo
+        float timeToChange = 0.1f; // Tiempo para cambiar al color rojo
+        for (float t = 0; t < 1; t += Time.deltaTime / timeToChange)
+        {
+            spriteRenderer.color = Color.Lerp(originalColor, targetColor, t);
+            yield return null;
+        }
 
+        spriteRenderer.color = targetColor; // Asegúrate de que el color es completamente rojo
+
+        // Espera 1 segundo
+        yield return new WaitForSeconds(1);
+
+        // Vuelve al color original
+        timeToChange = 0.1f; // Tiempo para volver al color original
+        for (float t = 0; t < 1; t += Time.deltaTime / timeToChange)
+        {
+            spriteRenderer.color = Color.Lerp(targetColor, originalColor, t);
+            yield return null;
+        }
+
+        spriteRenderer.color = originalColor; // Restablece el color original
+        isHurting = false;
+    }
 
     // Función llamada cuando el jugador recibe un disparo
     public void Hit()
     {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit); // Reproduce el sonido al morir
+        if (!isHurting) StartCoroutine(ChangeColorTemporarily());
         GameManager.Instance.PerderVida(); // Reduce las vidas del GameManager
         // Desactiva una vida en la interfaz de usuario (comentado)
         // Destruye el objeto si no tiene más vidas (comentado)

@@ -61,7 +61,7 @@ public class GruntScript : MonoBehaviour
             direction = Vector2.left;
 
         // Instanciamos la bala y establecemos su dirección
-        GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 1.0f, Quaternion.identity);
+        GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.5f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
     }
 

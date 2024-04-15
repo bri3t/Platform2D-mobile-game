@@ -8,6 +8,8 @@ TagManager:
   - BordeInferior
   - coinBorder
   - Borders
+  - Pies
+  - Cabeza
   layers:
   - Default
   - TransparentFX
