@@ -59,46 +59,50 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     // Update is called once per frame
     void Update() // Método llamado en cada frame
     {
-        movimientoHorizontal = inputSystem.Movimiento.Horizontal.ReadValue<float>() * speed; // Obtiene la entrada del eje movimientoHorizontal
-
-        // Cambia la escala del objeto según la dirección movimientoHorizontal
-        if (movimientoHorizontal < 0.0f) transform.localScale = new Vector3(-5.0f, 5.0f, 5.0f);
-        else if (movimientoHorizontal > 0.0f) transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
-
-        // Establece el parámetro "running" en el Animator según la dirección movimientoHorizontal
-        Animator.SetBool("running", movimientoHorizontal != 0.0f);
-        // Establece el parámetro "dead" en el Animator según las vidas del GameManager
-        Animator.SetBool("dead", GameManager.Instance.Vidas == 0);
-
-        if (Physics2D.Raycast(transform.position, Vector3.down, 0.5f)) // Realiza un Raycast hacia abajo
+        if (GameManager.Instance.Vidas > 0)
         {
-            Grounded = true; // Establece Grounded a true si el Raycast golpea algo
+            movimientoHorizontal = inputSystem.Movimiento.Horizontal.ReadValue<float>() * speed; // Obtiene la entrada del eje movimientoHorizontal
+
+            // Cambia la escala del objeto según la dirección movimientoHorizontal
+            if (movimientoHorizontal < 0.0f) transform.localScale = new Vector3(-5.0f, 5.0f, 5.0f);
+            else if (movimientoHorizontal > 0.0f) transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
+
+            // Establece el parámetro "running" en el Animator según la dirección movimientoHorizontal
+            Animator.SetBool("running", movimientoHorizontal != 0.0f);
+            // Establece el parámetro "dead" en el Animator según las vidas del GameManager
+            Animator.SetBool("dead", GameManager.Instance.Vidas == 0);
+
+            if (Physics2D.Raycast(transform.position, Vector3.down, 0.5f)) // Realiza un Raycast hacia abajo
+            {
+                Grounded = true; // Establece Grounded a true si el Raycast golpea algo
+            }
+            else Grounded = false; // Establece Grounded a false si el Raycast no golpea nada
+
+
+
+
+
+            // -------------------------------- Para teclado y raton (pruebas) --------------------------------
+            // Ejecuta la función de saltar si se presiona la tecla correspondiente y el personaje está tocando el suelo
+            if (Input.GetKeyDown(KeyCode.W) && Grounded)
+            {
+                Jump();
+            }
+
+            // Ejecuta la función de disparar si se presiona la tecla correspondiente y el tiempo entre disparos es correcto
+            if (Input.GetKeyDown(KeyCode.Space) && Time.time > LastShoot + 0.15f)
+            {
+                Shoot();
+                LastShoot = Time.time; // Actualiza el tiempo del último disparo
+            }
+            // -------------------------------- Para teclado y raton (pruebas) --------------------------------
+
+
+
+            if (this.transform.position.y <= 4.8f) isOnTop = false; // si jhon esta por debajo de 4.8 del valor de Y significara que no esta en la parte superior del mapa
+                                                                    // Entonces la camara se posicionara donde toca correctamente
         }
-        else Grounded = false; // Establece Grounded a false si el Raycast no golpea nada
 
-
-
-
-
-        // -------------------------------- Para teclado y raton (pruebas) --------------------------------
-        // Ejecuta la función de saltar si se presiona la tecla correspondiente y el personaje está tocando el suelo
-        if (Input.GetKeyDown(KeyCode.W) && Grounded)
-        {
-            Jump();
-        }
-
-        // Ejecuta la función de disparar si se presiona la tecla correspondiente y el tiempo entre disparos es correcto
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > LastShoot + 0.15f)
-        {
-            Shoot();
-            LastShoot = Time.time; // Actualiza el tiempo del último disparo
-        }
-        // -------------------------------- Para teclado y raton (pruebas) --------------------------------
-
-
-
-        if (this.transform.position.y <= 4.8f) isOnTop = false; // si jhon esta por debajo de 4.8 del valor de Y significara que no esta en la parte superior del mapa
-                                                                // Entonces la camara se posicionara donde toca correctamente
     }
 
     // Método llamado en cada frame fijo para el movimiento del jugador
