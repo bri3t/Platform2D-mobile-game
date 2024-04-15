@@ -77,7 +77,7 @@ Para hacer este proyecto he usado:
 ## Lenguaje de programación usado
 - C#
 
-## Paquetes usados
+## Paquetes unity usados
 
 ![libs](https://github.com/bri3t/Platform2D-mobile-game/assets/120582826/bf2a03e8-98ee-4bf6-88d7-e55d4d154aae)
 
