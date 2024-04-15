@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public HUD hud; // Referencia al HUD para actualizar la interfaz de usuario
 
     public JhonMovement john = JhonMovement.Instance; // Referencia la clase john
+    public AudioClip SoundHit; // Sonido al recibir un disparo
+
 
     public GameOverScreen GameOverScreen;
     public WinnerScreen WinnerScreen;
@@ -55,7 +57,7 @@ public class GameManager : MonoBehaviour
     {
         vidas -= 1; // Restamos una vida
         hud.DesactivarVida(vidas); // Desactivamos la representación gráfica de una vida en la interfaz de usuario
-        Debug.Log(vidas);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit); // Reproduce el sonido al morir
 
         if (vidas == 0)
         {

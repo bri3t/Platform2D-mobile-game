@@ -52,19 +52,6 @@ public class BulletScript : MonoBehaviour
             GruntScript grunt = collision.GetComponent<GruntScript>(); // Obtenemos el componente GruntScript del objeto con el que colisionó la bala
             grunt.Hit(); // Llamamos al método Hit() del script JhonMovement
         }
-        /*
-                // Si choca con Jhon:
-                if (john != null)
-                {
-                    john.Hit(); // Llamamos al método Hit() del script JhonMovement
-                    DestroyBullet(); // Destruimos la bala
-                }
-
-                // Si choca con el enemigo
-                if (grunt != null)
-                {
-                    grunt.Hit(); // Llamamos al método Hit() del script GruntScript
-                    DestroyBullet(); // Destruimos la bala
-                }*/
+        
     }
 }

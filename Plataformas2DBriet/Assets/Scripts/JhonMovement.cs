@@ -9,7 +9,9 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     public GameObject BulletPrefab; // Referencia al prefab de la bala
     public float JumpForce; // Fuerza del salto
     public AudioClip SoundJump; // Sonido del salto
-    public AudioClip SoundHit; // Sonido al recibir un disparo
+    public AudioClip SoundDeath; // Sonido al recibir un disparo
+    public AudioClip SoundBounce; // Sonido al rebotar
+
 
     public float speed; // Velocidad del jugador
     private float movimientoHorizontal = 0f; // Almacena el valor del eje movimientoHorizontal
@@ -159,21 +161,36 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Cabeza"))
+
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            Grounded = true;
-            Debug.Log("wtf");
-            //GruntScript grunt = collision.gameObject.GetComponent<GruntScript>(); // Obtenemos el componente GruntScript del objeto con el que colisionó la bala
-            //grunt.StartCoroutine(animacion()); // Iniciamos la animación de muerte
+            GruntScript grunt = collision.gameObject.GetComponent<GruntScript>();
+
+            if (collision.gameObject.GetComponent<GruntScript>().transform.position.y + 0.7f <= transform.position.y)
+            {
+                BounceOffEnemy(collision);
+                grunt.IniciarAnimacionMorir();
+            }
+            else
+            {
+               if (grunt.Health > 0) Hit();
+            }
         }
 
+    }
 
-        //if (collision.gameobject.comparetag("enemy"))
-        //{
-        //    hit();
-        //}
+    // Función para aplicar una fuerza de rebote aleatoria
+    private void BounceOffEnemy(Collision2D collision)
+    {
+        // Genera una dirección aleatoria
+        float randomX = Random.Range(-1f, 1f); // Valores aleatorios para X entre -1 y 1
+        float randomY = Random.Range(0.5f, 1f); // Valores aleatorios para Y entre 0.5 y 1 para asegurar un rebote hacia arriba
+        Vector2 bounceDirection = new Vector2(randomX, randomY).normalized; // Normaliza para mantener la magnitud constante
 
-
+        // Aplica la fuerza de rebote
+        float bounceForce = 650f; // Ajusta esta fuerza como necesites
+        rb2d.AddForce(bounceDirection * bounceForce);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundBounce); // Reproduce el sonido al rebotar
 
     }
 
@@ -221,7 +238,6 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     // Función llamada cuando el jugador recibe un disparo
     public void Hit()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit); // Reproduce el sonido al morir
         if (!isHurting) StartCoroutine(ChangeColorTemporarily());
         GameManager.Instance.PerderVida(); // Reduce las vidas del GameManager
         // Desactiva una vida en la interfaz de usuario (comentado)
@@ -232,7 +248,7 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     // Función llamada para la animación de muerte del jugador
     public void Morir()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundHit); // Reproduce el sonido al morir
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundDeath); // Reproduce el sonido al morir
         StartCoroutine(animacion()); // Inicia la animación de muerte
     }
 

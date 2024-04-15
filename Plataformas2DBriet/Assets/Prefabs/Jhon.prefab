@@ -175,7 +175,8 @@ MonoBehaviour:
   BulletPrefab: {fileID: 8476119518381985782, guid: a56314569d1197a4eac965aee52d784f, type: 3}
   JumpForce: 500
   SoundJump: {fileID: 8300000, guid: e1c3fa518169bff479f2ca6c95698293, type: 3}
-  SoundHit: {fileID: 8300000, guid: c01b7dc8ca1aedb44818951b9437d449, type: 3}
+  SoundHit: {fileID: 8300000, guid: 3232ae6e934211141b9ee356e8847888, type: 3}
+  SoundBounce: {fileID: 8300000, guid: b09a86a310e24564b89ae6b275cc765b, type: 3}
   speed: 0
   spriteRenderer: {fileID: 3544171133121419216}
 --- !u!95 &100068126506973152
