@@ -36,8 +36,8 @@ Listado de enlaces a todas las fuentes de información, sprites, assets o docume
 - [Botones](https://void1gaming.itch.io/pixel-buttons)
 - [Fuente](https://www.dafont.com/es/search.php?q=Minecraft)
 - Sonidos extra
-- [sound](https://elements.envato.com/es/sound-effects/coin)
-- [sound](https://www.fesliyanstudios.com/royalty-free-music/downloads-c/8-bit-music/6)
+   - [sound](https://elements.envato.com/es/sound-effects/coin)
+   - [sound](https://www.fesliyanstudios.com/royalty-free-music/downloads-c/8-bit-music/6)
 - [Wallpaper menú](https://wallpaper.mob.org/pc/image/artistic-pixel_art-mountain-waterfall-1035817.html#google_vignette)
 
 ## Cómo Instalar y Ejecutar
