@@ -12,6 +12,7 @@ Inicio del juego: Ejecuta el juego y selecciona 'Start Game' en el menú princip
 - **Salto**: John puede saltar presionando la tecla 'W' o pulsando el botón por pantalla de salto, que le permite esquivar enemigos y alcanzar plataformas elevadas.
 - **Disparo**: Al presionar la tecla 'Espacio' o bien pulsando el botón por pantalla de disparo, John dispara a los enemigos frente a él. Las balas tienen una trayectoria recta y desaparecen al impactar.
 - **Vidas y Puntuación**: John comienza el juego con un número limitado de vidas (4). Puede perder vidas al ser golpeado por enemigos o al caerse del mapa, y puede recuperarlas recogiendo ítems de vida que aparecen en el nivel.
+- **Matar enemigos**: Los enemigos tienen 2 puntos de vida, pueden morir al recibir 2 balas de John, o que Jhon les caiga encima de la cabeza.
 
 ## Puzzle
 Para poder pasarte el juego, deberás saltar encima de esta palmera, y avanzar a las siguientes dos plataformas situadas arriba para colectar la moneda especial roja.
