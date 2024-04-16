@@ -248,7 +248,7 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     // Función llamada para la animación de muerte del jugador
     public void Morir()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundDeath); // Reproduce el sonido al morir
+        //Camera.main.GetComponent<AudioSource>().PlayOneShot(SoundDeath); // Reproduce el sonido al morir
         StartCoroutine(animacion()); // Inicia la animación de muerte
     }
 

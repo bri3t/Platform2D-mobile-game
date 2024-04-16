@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
     public void SumarPuntos(int puntosASumar)
     {
         puntosTotales += puntosASumar;
-        Debug.Log(puntosTotales);
         hud.ActualizarPuntos(puntosTotales); // Actualizamos el contador de puntos en la interfaz de usuario
         if (puntosTotales >= metaPuntos)
         {
