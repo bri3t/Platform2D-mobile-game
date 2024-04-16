@@ -13,7 +13,7 @@ Inicio del juego: Ejecuta el juego y selecciona 'Start Game' en el menú princip
 - **Disparo**: Al presionar la tecla 'Espacio' o bien pulsando el botón por pantalla de disparo, John dispara a los enemigos frente a él. Las balas tienen una trayectoria recta y desaparecen al impactar.
 - **Vidas y Puntuación**: John comienza el juego con un número limitado de vidas (4). Puede perder vidas al ser golpeado por enemigos o al caerse del mapa, y puede recuperarlas recogiendo ítems de vida que aparecen en el nivel.
 
-### Puzzle
+## Puzzle
 Para poder pasarte el juego, deberás saltar encima de esta palmera, y avanzar a las siguientes dos plataformas situadas arriba para colectar la moneda especial roja.
 <br>
 <img src="https://github.com/bri3t/Platform2D-mobile-game/assets/120582826/5cc7f77d-4625-428a-9d93-cd944449f3ed" alt="puzzle" width="400" height="250">
