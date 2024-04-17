@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting; // Importa el espacio de nombres Unity.VisualScripting
 using UnityEngine; // Importa el espacio de nombres UnityEngine
+using UnityEngine.InputSystem;
 
 public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que hereda de MonoBehaviour
 {
@@ -38,7 +39,10 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     {
         rb2d = GetComponent<Rigidbody2D>(); // Obtiene el Rigidbody2D del objeto
         Animator = GetComponent<Animator>(); // Obtiene el Animator del objeto
-        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        inputSystem.Movimiento.Salto.performed += contexto => Jump(contexto);
+        inputSystem.Movimiento.Disparo.performed += contexto => Shoot(contexto);
+
     }
 
 
@@ -88,13 +92,13 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
             // Ejecuta la función de saltar si se presiona la tecla correspondiente y el personaje está tocando el suelo
             if (Input.GetKeyDown(KeyCode.W) && Grounded)
             {
-                Jump();
+                //Jump();
             }
 
             // Ejecuta la función de disparar si se presiona la tecla correspondiente y el tiempo entre disparos es correcto
             if (Input.GetKeyDown(KeyCode.Space) && Time.time > LastShoot + 0.15f)
             {
-                Shoot();
+                //Shoot();
                 LastShoot = Time.time; // Actualiza el tiempo del último disparo
             }
             // -------------------------------- Para teclado y raton (pruebas) --------------------------------
@@ -131,7 +135,7 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
 
 
     // Función para disparar
-    public void Shoot()
+    public void Shoot(InputAction.CallbackContext contexto)
     {
         if (Time.time > LastShoot + 0.15f)
         {     
@@ -149,7 +153,7 @@ public class JhonMovement : MonoBehaviour // Declara la clase JhonMovement que h
     }
 
     // Función para saltar
-    public void Jump()
+    public void Jump(InputAction.CallbackContext contexto)
     {
         if (Grounded)
         {

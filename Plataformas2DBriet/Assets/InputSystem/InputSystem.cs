@@ -35,6 +35,24 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Salto"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""44214e39-8fbd-498d-b240-a729f09862b9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Disparo"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""456d9da1-ded5-4a0c-b162-1954c1c912e8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -103,6 +121,28 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""Horizontal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01e86a68-4bef-4e68-ae52-74a8bba0eebf"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Salto"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7fae114f-bfde-4efe-8597-f4968dfcadc6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Disparo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -112,6 +152,8 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         // Movimiento
         m_Movimiento = asset.FindActionMap("Movimiento", throwIfNotFound: true);
         m_Movimiento_Horizontal = m_Movimiento.FindAction("Horizontal", throwIfNotFound: true);
+        m_Movimiento_Salto = m_Movimiento.FindAction("Salto", throwIfNotFound: true);
+        m_Movimiento_Disparo = m_Movimiento.FindAction("Disparo", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,11 +216,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Movimiento;
     private List<IMovimientoActions> m_MovimientoActionsCallbackInterfaces = new List<IMovimientoActions>();
     private readonly InputAction m_Movimiento_Horizontal;
+    private readonly InputAction m_Movimiento_Salto;
+    private readonly InputAction m_Movimiento_Disparo;
     public struct MovimientoActions
     {
         private @InputSystem m_Wrapper;
         public MovimientoActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Horizontal => m_Wrapper.m_Movimiento_Horizontal;
+        public InputAction @Salto => m_Wrapper.m_Movimiento_Salto;
+        public InputAction @Disparo => m_Wrapper.m_Movimiento_Disparo;
         public InputActionMap Get() { return m_Wrapper.m_Movimiento; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -191,6 +237,12 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Horizontal.started += instance.OnHorizontal;
             @Horizontal.performed += instance.OnHorizontal;
             @Horizontal.canceled += instance.OnHorizontal;
+            @Salto.started += instance.OnSalto;
+            @Salto.performed += instance.OnSalto;
+            @Salto.canceled += instance.OnSalto;
+            @Disparo.started += instance.OnDisparo;
+            @Disparo.performed += instance.OnDisparo;
+            @Disparo.canceled += instance.OnDisparo;
         }
 
         private void UnregisterCallbacks(IMovimientoActions instance)
@@ -198,6 +250,12 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Horizontal.started -= instance.OnHorizontal;
             @Horizontal.performed -= instance.OnHorizontal;
             @Horizontal.canceled -= instance.OnHorizontal;
+            @Salto.started -= instance.OnSalto;
+            @Salto.performed -= instance.OnSalto;
+            @Salto.canceled -= instance.OnSalto;
+            @Disparo.started -= instance.OnDisparo;
+            @Disparo.performed -= instance.OnDisparo;
+            @Disparo.canceled -= instance.OnDisparo;
         }
 
         public void RemoveCallbacks(IMovimientoActions instance)
@@ -218,5 +276,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     public interface IMovimientoActions
     {
         void OnHorizontal(InputAction.CallbackContext context);
+        void OnSalto(InputAction.CallbackContext context);
+        void OnDisparo(InputAction.CallbackContext context);
     }
 }
