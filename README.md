@@ -55,24 +55,28 @@ Abre una terminal y ejecuta el siguiente comando para clonar el repositorio:
 ```
 ## Abre el Proyecto en Unity
 
-Una vez que tengas el código fuente en tu máquina local, abre Unity Hub. Si aún no tienes Unity Hub, puedes descargarlo desde [Unity Download Page](https://unity.com/download).
+Una vez que tengas el código fuente en tu máquina local, abre Unity Hub. Si no lo tienes, puedes descargarlo desde [Unity Download Page](https://unity.com/download).
 
 En Unity Hub, ve a la pestaña 'Projects', luego haz clic en 'ADD' y selecciona la carpeta donde clonaste el proyecto. Esto añadirá el proyecto a tu lista de proyectos de Unity. Haz clic en el nombre del proyecto para abrirlo en el editor de Unity.
 Construir y Ejecutar el Juego
 
-Para construir y ejecutar el juego en tu dispositivo móvil, sigue estos pasos en el editor de Unity:
-1. Conecta tu dispositivo móvil a la computadora a través de USB. Asegúrate de que esté configurado para permitir la depuración por USB.
+Para desplegar y ejecutar el juego en tu dispositivo móvil, sigue estos pasos en el editor de Unity:
+1. Conecta tu dispositivo móvil al ordenador a través de USB. Asegúrate de que esté configurado para permitir la depuración por USB.
 2. En Unity, ve a File &gt; Build Settings.
 3. Selecciona la plataforma de destino (Android) en la lista y haz clic en Switch Platform.
 4. Para Android, asegúrate de que Google Android Project esté marcado si quieres editar el proyecto con Android Studio.
 5. Haz clic en Build. Esto compilará el juego y generará un fichero apk que podrás instalar en un dispositivo android.
 6. ¡Jugar!
 
+Para ejecutar el juego desde el ordenador, simplemente ejecutalo desde unity. Podrás jugarlo desde la pestaña "Game" usando los controles del ordenador, o desde el simulador, para poder probar la pantalla tactil y jugabilidad en móvil.
+
 ## Compatibilidad
 Para hacer este proyecto he usado:
 - Unity: 2022.3.21f1
 - Microsoft Visual Studio: 2022 17.9.6
 - Java: "17.0.9" 2023-10-17 LTS
+- Gradle 8.2.0
+- SDK 33
 
 ## Lenguaje de programación usado
 - C#
